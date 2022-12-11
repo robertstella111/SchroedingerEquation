@@ -1,0 +1,5 @@
+setup.py
+viennaio.egg-info/PKG-INFO
+viennaio.egg-info/SOURCES.txt
+viennaio.egg-info/dependency_links.txt
+viennaio.egg-info/top_level.txt

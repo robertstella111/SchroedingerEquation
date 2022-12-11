@@ -1,0 +1,5 @@
+setup.py
+Schroedinger.egg-info/PKG-INFO
+Schroedinger.egg-info/SOURCES.txt
+Schroedinger.egg-info/dependency_links.txt
+Schroedinger.egg-info/top_level.txt
