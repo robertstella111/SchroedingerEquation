@@ -21,6 +21,20 @@ class Mat{
             dim = i;
         }
 
+        Mat(SparseMat mat2) {
+            unsigned i = mat2.getDim();
+            std::vector<double>  buff(i, 0);
+            for(unsigned k = 0; k < i; k++) {
+                mat.push_back(buff);
+            }
+            dim = i;
+            for(unsigned k = 0; k < mat.size(); k++) {
+                for(unsigned i = 0; i < mat.size(); i++) {
+                    mat[k][i] = mat2.getCoeff(k,i);
+                }
+            }
+        }
+
         void createIdentity() {
 
             for(unsigned k = 0; k < mat.size(); k++) {

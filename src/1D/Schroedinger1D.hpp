@@ -43,7 +43,7 @@ class Schroedinger1D{
         }
 
 
-        void solve(unsigned number) {
+        void solve(unsigned number, double epsilon) {
             //Eigen::MatrixXd mat(length-2, length-2);
             SparseMat mat = SparseMat(length-2);
             std::cout << "Initializing matrix" << std::endl;
@@ -64,7 +64,7 @@ class Schroedinger1D{
                 }
             }
             std::cout << "Solve eigenvalue problem" << std::endl;
-            
+            solver.setEpsilon(epsilon);
             solver.solveJacobi(number,mat);
             std::cout << "solved!" << std::endl;
             for(unsigned k = 0; k < length-2; k++)  {

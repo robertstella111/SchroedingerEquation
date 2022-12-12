@@ -4,13 +4,13 @@ from matplotlib.widgets import Slider, Button
 import numpy as np
 
 
-length = 160
+length = 600
 b = 1
 a = 0
 obj = Schroedinger.Schroedinger1D()
 obj.setNumPoints(length)
 obj.setDomain(a,b)
-obj.solve(100000)
+obj.solve(1000000, 10)
 
 
 def f1(n):

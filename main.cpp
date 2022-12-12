@@ -5,7 +5,7 @@
 
 int main() {
   
-    unsigned length = 10;
+    unsigned length = 600;
     double a,b,h;
     SparseMat mat = SparseMat(length-2);
     a = 0;
@@ -30,8 +30,9 @@ int main() {
             }
 
     EigenValue solver;
+    solver.setEpsilon(10);
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    solver.solveJacobi(100000,mat);
+    solver.solveJacobi(1000000,mat);
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
     std::cout << "EigenValues: error relativ" << std::endl;
