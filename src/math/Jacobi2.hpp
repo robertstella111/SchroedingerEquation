@@ -8,26 +8,32 @@
 
 
 
-class EigenValue{
+class EigenValueP{
     private:
-        SparseMat *result;
-        SparseMat eigvec = SparseMat(3);
+        SparseMatPointer *result;
+        SparseMatPointer eigvec = SparseMatPointer(3);
         std::vector<double> eigvals;
         double epsilon = 1e-2;
     public:
         void setEpsilon(double eps) {
             epsilon = eps;
         }
-        void solveJacobi(unsigned number, SparseMat *mat) {
+
+
+
+        void solveJacobi(unsigned number, SparseMatPointer *mat) {
+
+            
             unsigned row_index, column_index;
             result = mat;
             unsigned dim = mat->getDim() - 1;
             
-            eigvec = SparseMat(mat->getDim());
+            eigvec = SparseMatPointer(mat->getDim());
             eigvec.createIdentity();
             result->initMaxIndex();
             double angle;
             unsigned counter1 = dim;
+            
             for(unsigned k = 0; k < number; k++) {
             for(unsigned i = 0; i < counter1;) {
                 for(unsigned j = 0; j < i +1;  j++){
@@ -43,7 +49,7 @@ class EigenValue{
                     }
                 
                     result->Transform1D(angle, row_index, column_index); 
-                    eigvec.EigVec(angle,row_index, column_index);
+                    //eigvec.EigVec(angle,row_index, column_index);
                     
                 }
                 
@@ -55,16 +61,19 @@ class EigenValue{
             }
             
             for(unsigned i = 0; i < result->getDim(); i++) eigvals.push_back(result->getCoeff(i, i));
-           // for(unsigned i = 0; i < result.getDim(); i++) std::cout << result.getCeff(i,i) << " " << result.maxRowIndex(i) << std::endl;
-            
+           // for(unsigned i = 0; i < result.getDim(); i++) std::cout << result.getCoeff(i,i) << " " << result.maxRowIndex(i) << std::endl;
+           
     
-        }
-
-        std::vector<double> EigenVector(unsigned i) {
-            return eigvec.getEigenvector(i);
         }
 
         double getEigenValue(unsigned i) {
             return eigvals[i];
         }
+/*
+        std::vector<double> EigenVector(unsigned i) {
+            return eigvec.getEigenvector(i);
+        }
+
+        
+        */
 };

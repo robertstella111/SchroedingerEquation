@@ -45,6 +45,9 @@ SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 ################
 set(LIBRARY_OUTPUT_PATH    ${CMAKE_SOURCE_DIR}/lib/Schroedinger)
 LINK_DIRECTORIES(${LIBRARY_OUTPUT_PATH})
+
+
+
 #SET(LIBRARIES ${PYTHON_LIBRARIES})
 # Subdirectories
 ################
@@ -68,8 +71,28 @@ include_directories(pybind11/include/pybind11)
 INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/src/ )
 add_subdirectory(pybind11)
 
+
+
+find_package(OpenMP REQUIRED)
+add_executable(main3 main3.cpp)
+target_link_libraries(main3 PRIVATE OpenMP::OpenMP_CXX)
+target_include_directories(main3 PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
+
 add_executable(main main.cpp)
+target_link_libraries(main PRIVATE OpenMP::OpenMP_CXX)
 target_include_directories(main PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
+
+
+
+add_executable(main2 main2.cpp)
+target_include_directories(main2 PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
+target_link_libraries(main2 PRIVATE OpenMP::OpenMP_CXX)
+
+
+add_executable(main4 main4.cpp)
+target_include_directories(main4 PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
+target_link_libraries(main4 PRIVATE OpenMP::OpenMP_CXX)
+
 
 
 
@@ -79,3 +102,4 @@ set(SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/src/pybind11/pyIO.cpp
     )
 pybind11_add_module(Schroedinger ${SRC})
+target_link_libraries(Schroedinger PRIVATE OpenMP::OpenMP_CXX)

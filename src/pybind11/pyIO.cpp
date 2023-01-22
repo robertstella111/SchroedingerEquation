@@ -23,6 +23,19 @@ PYBIND11_MODULE(Schroedinger, m) {
       .def("getEigenValues", &Schroedinger1D::getEigenValuesSort, "setLength  ")
       .def("setDomain", &Schroedinger1D::setDomain, "setLength  ");
 
+  py::class_<Schroedinger1DParallel>(m, "Schroedinger1DParallel")
+      .def(py::init<>())
+      .def("setNumThreads", &Schroedinger1DParallel::setNumThreads, "setNumThreads")
+      .def("solve", &Schroedinger1DParallel::solve, "solve")
+      .def("getEigenvektor", &Schroedinger1DParallel::getEigenvektorSort, "getEigenvektor")
+      .def("getXKoord", &Schroedinger1DParallel::getXKoord, "getXKoord")
+      .def("setNumPoints", &Schroedinger1DParallel::setNumPoints, "setLength  ")
+      .def("getEigenValues", &Schroedinger1DParallel::getEigenValuesSort, "setLength  ")
+      .def("setDomain", &Schroedinger1DParallel::setDomain, "setLength  ");
+
+
+ 
+
 
 
 

@@ -1,10 +1,10 @@
-Metadata-Version: 1.0
+Metadata-Version: 2.1
 Name: Schroedinger
 Version: 0.1.0
 Summary: ViennaIO
 Home-page: https://tcl-git.iue.tuwien.ac.at/TCAD/viennamc
-Author: UNKNOWN
-Author-email: UNKNOWN
 License: UNKNOWN
-Description: Semiconductor Monte Carlo simulation package
 Platform: UNKNOWN
+
+Semiconductor Monte Carlo simulation package
+

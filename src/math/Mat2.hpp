@@ -6,6 +6,7 @@
 #include <map>
 #include <chrono>
 
+
 class SparseMat {
     private:
         std::vector<std::vector<double>> list;

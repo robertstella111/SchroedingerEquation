@@ -4,16 +4,23 @@
 #include <map>
 
 
-class Schroedinger1D{
+class Schroedinger1DParallel{
     private:
         double b = 1, a = 0,h;
         unsigned length = 20;
         std::map<double, std::vector<double>> function;
-        EigenValue solver;
+        unsigned THREADS1;
+        EigenValueParallel solver = EigenValueParallel(1);
     
     public:
-        Schroedinger1D() {
+        Schroedinger1DParallel() {
             h = (b-a)/(length-1);
+            
+        }
+
+        void setNumThreads(unsigned ThreadNum) {
+            THREADS1 = ThreadNum;
+            solver = EigenValueParallel(ThreadNum);
         }
         
         void setNumPoints(unsigned l) {
@@ -45,7 +52,7 @@ class Schroedinger1D{
 
         void solve(unsigned number, double epsilon) {
             //Eigen::MatrixXd mat(length-2, length-2);
-            SparseMat mat = SparseMat(length-2);
+            SparseMatParallel mat = SparseMatParallel(THREADS1,length-2);
             std::cout << "Initializing matrix" << std::endl;
             for(unsigned i = 0; i < length-2; i++) {
                 if(i == 0) {
