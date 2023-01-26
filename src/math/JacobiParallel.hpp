@@ -10,8 +10,8 @@
 
 class EigenValueParallel{
     private:
-        SparseMatParallel *result;
-        SparseMatParallel eigvec = SparseMatParallel(1,3);
+        MatParallel *result;
+        MatParallel eigvec = MatParallel(1,3);
         std::vector<double> eigvals;
         double epsilon = 1e-2;
         unsigned NUM_THREADS = 1;
@@ -24,18 +24,18 @@ class EigenValueParallel{
             NUM_THREADS = n;
         }
 
-        void solveJacobi(unsigned number, SparseMatParallel *mat) {
+        void solveJacobi(unsigned number, MatParallel *mat) {
             unsigned row_index, column_index;
             std::vector<unsigned> all_rows(NUM_THREADS), all_column(NUM_THREADS);
             result = mat;
             unsigned dim = mat->getDim();
-            eigvec = SparseMatParallel(NUM_THREADS,mat->getDim());
+            eigvec = MatParallel(NUM_THREADS,mat->getDim());
             eigvec.createIdentity();
             result->initMaxIndex();
             std::vector<double> angles(NUM_THREADS);
             double angle = 0;
         
-            
+            //first part of algorithm
             for(unsigned outerCounter = 0; outerCounter < number; outerCounter++) {
                 for(unsigned counter1 = dim - dim/NUM_THREADS; counter1 < dim; counter1 = counter1 + NUM_THREADS) {
                     for(unsigned counter2 = 0; counter2 < counter1 + NUM_THREADS;  counter2 = counter2 + NUM_THREADS){
@@ -102,7 +102,7 @@ class EigenValueParallel{
                     
                 }
             }
-
+            //fine tuning in last lines of matrix
             for(unsigned k = 0; k < number; k++) {
                 for(unsigned i = 0; i <dim;  i++) {
                     for(unsigned j = 0; j < i+1;  j++){

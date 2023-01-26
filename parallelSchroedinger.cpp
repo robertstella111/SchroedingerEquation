@@ -6,7 +6,7 @@
 int main() {
     unsigned length = 1010;
     double a,b,h;
-    SparseMatParallel mat = SparseMatParallel(THREADS, length - 2);
+    MatParallel mat = MatParallel(THREADS, length - 2);
     a = 0;
     b = 1;
     h = (b-a)/(length-1);

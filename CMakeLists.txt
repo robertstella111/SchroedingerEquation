@@ -74,24 +74,18 @@ add_subdirectory(pybind11)
 
 
 find_package(OpenMP REQUIRED)
-add_executable(main3 main3.cpp)
-target_link_libraries(main3 PRIVATE OpenMP::OpenMP_CXX)
-target_include_directories(main3 PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
+add_executable(parallelSchroedinger parallelSchroedinger.cpp)
+target_link_libraries(parallelSchroedinger PRIVATE OpenMP::OpenMP_CXX)
+target_include_directories(parallelSchroedinger PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
 
-add_executable(main main.cpp)
-target_link_libraries(main PRIVATE OpenMP::OpenMP_CXX)
-target_include_directories(main PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
-
-
-
-add_executable(main2 main2.cpp)
-target_include_directories(main2 PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
-target_link_libraries(main2 PRIVATE OpenMP::OpenMP_CXX)
+add_executable(serialSchroedinger serialSchroedinger.cpp)
+target_link_libraries(serialSchroedinger PRIVATE OpenMP::OpenMP_CXX)
+target_include_directories(serialSchroedinger PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
 
 
-add_executable(main4 main4.cpp)
-target_include_directories(main4 PRIVATE  ${CMAKE_SOURCE_DIR}/src/)
-target_link_libraries(main4 PRIVATE OpenMP::OpenMP_CXX)
+
+
+
 
 
 

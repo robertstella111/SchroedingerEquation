@@ -7,7 +7,7 @@
 #include <chrono>
 
 
-class SparseMat {
+class Mat {
     private:
         std::vector<std::vector<double>> list;
         std::vector<unsigned> max_index_row;    
@@ -15,18 +15,14 @@ class SparseMat {
         unsigned dim;
     public:
 
-    SparseMat(unsigned i) {
+    Mat(unsigned i) {
             std::vector<double>  buff(i, 0);
             for(unsigned k = 0; k < i; k++) {
                 list.push_back(buff);
             }
             dim = i;
     }
-/*
-    SparseMat(unsigned i, std::map<unsigned, std::map<unsigned, double>>* buff) {
-            list = *buff;
-    }
-*/  
+
     double maxRowIndex(unsigned i) {
         return max_value_row[i];
     }

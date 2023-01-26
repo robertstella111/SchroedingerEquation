@@ -24,11 +24,12 @@ xkoord = []
 error1 = []
 xkoord2 = obj.getXKoord()  
 
+#error for all eigenvalues 
 for i in range(length-2):
     fehler = (eigenvalues[i]-(((i+1)*math.pi)/(b-a))**2)/(((i+1)*math.pi/(b-a)))**2
     error.append(100*fehler)
     xkoord.append(i+1)
-
+#error for eigenvector, sign can vary because sign of eigenvector can have -sin and +sin
 for i in range(len(eigenvector)):
     fehler = eigenvector[i] + np.sqrt(2/(b-a))*np.sin((n*math.pi*(xkoord2[i]-a))/(b-a))
     error1.append(fehler)
@@ -36,13 +37,10 @@ for i in range(len(eigenvector)):
 
 plt.rc('grid', linestyle=':', color='g', linewidth=0.5)
 fig, ax = plt.subplots()
-#ax.plot(xkoord,error)
 ax.plot(xkoord2,error1)
 plt.grid()
 plt.xlabel("x in m")
 plt.ylabel("Amplitude")
 plt.title("Lösung der Schrödinger Gleichung")
-
-
 
 plt.show()

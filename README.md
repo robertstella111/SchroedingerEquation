@@ -27,9 +27,9 @@ Currently, only Linux is supported and tested for. If you find problems for Wind
 
 ## Python example with viennaio library
 
-Interactive plot of the the wavefunction in the infinite potential
+Interactive plot of the the wavefunction in the infinite potential well
 
-* `cd test` - change to example dir
+* `cd python` - change to example dir
 * `python3 plot.py` - run testfile
 ***
 

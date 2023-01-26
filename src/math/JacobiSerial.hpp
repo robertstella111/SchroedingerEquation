@@ -10,20 +10,20 @@
 
 class EigenValue{
     private:
-        SparseMat *result;
-        SparseMat eigvec = SparseMat(3);
+        Mat *result;
+        Mat eigvec = Mat(3);
         std::vector<double> eigvals;
         double epsilon = 1e-2;
     public:
         void setEpsilon(double eps) {
             epsilon = eps;
         }
-        void solveJacobi(unsigned number, SparseMat *mat) {
+        void solveJacobi(unsigned number, Mat *mat) {
             unsigned row_index, column_index;
             result = mat;
             unsigned dim = mat->getDim() - 1;
             
-            eigvec = SparseMat(mat->getDim());
+            eigvec = Mat(mat->getDim());
             eigvec.createIdentity();
             result->initMaxIndex();
             double angle;
@@ -42,8 +42,8 @@ class EigenValue{
                         if((result->getCoeff(row_index, row_index) - result->getCoeff(column_index, column_index)) < 0) angle += M_PI/2;
                     }
                 
-                    result->Transform1D(angle, row_index, column_index); 
-                    eigvec.EigVec(angle,row_index, column_index);
+                    result->Transform1D(angle, row_index, column_index);  //rotate matrix A
+                    eigvec.EigVec(angle,row_index, column_index); //unit matrix
                     
                 }
                 
@@ -54,9 +54,7 @@ class EigenValue{
             if(result->maxEntry() <= epsilon) break;
             }
             
-            for(unsigned i = 0; i < result->getDim(); i++) eigvals.push_back(result->getCoeff(i, i));
-           // for(unsigned i = 0; i < result.getDim(); i++) std::cout << result.getCeff(i,i) << " " << result.maxRowIndex(i) << std::endl;
-            
+            for(unsigned i = 0; i < result->getDim(); i++) eigvals.push_back(result->getCoeff(i, i));           
     
         }
 

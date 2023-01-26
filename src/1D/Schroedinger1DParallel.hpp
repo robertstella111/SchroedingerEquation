@@ -52,7 +52,7 @@ class Schroedinger1DParallel{
 
         void solve(unsigned number, double epsilon) {
             //Eigen::MatrixXd mat(length-2, length-2);
-            SparseMatParallel mat = SparseMatParallel(THREADS1,length-2);
+            MatParallel mat = MatParallel(THREADS1,length-2);
             std::cout << "Initializing matrix" << std::endl;
             for(unsigned i = 0; i < length-2; i++) {
                 if(i == 0) {

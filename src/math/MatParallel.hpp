@@ -24,7 +24,7 @@ IndexValuePair myMin(IndexValuePair a, IndexValuePair b){
 
 
 
-class SparseMatParallel {
+class MatParallel {
     private:
         std::unique_ptr<std::unique_ptr<double[]>[]> list;
         std::vector<unsigned> max_index_row;    
@@ -33,7 +33,7 @@ class SparseMatParallel {
         unsigned NUM_THREADS = 1;
     public:
 
-    SparseMatParallel(unsigned Threads, unsigned n) {
+    MatParallel(unsigned Threads, unsigned n) {
         dim = n;
         NUM_THREADS = Threads;
         list =  std::make_unique<std::unique_ptr<double[]>[]>(n);
@@ -179,6 +179,7 @@ class SparseMatParallel {
         double buffer = epsilon;
         unsigned index_buffer = row;
         auto p = list.get()[row].get();
+        
         for(unsigned i = row+1; i < dim; i++) {
             if(std::abs(p[i]) > buffer) {
                 index_buffer = i;
@@ -215,6 +216,19 @@ class SparseMatParallel {
         double buffer = epsilon;
         unsigned index_buffer = row;
         auto p = list.get()[row].get();
+        /*
+        for(unsigned i = 0; i < row-1; i++) {
+            if(std::abs(p[i]) > buffer) {
+                
+                if(std::find(columns->begin(), columns->end(), i) == columns->end() && 
+                std::find(rows->begin(), rows->end(), i) == rows->end()){
+                    index_buffer = i;
+                    buffer = std::abs(p[i]);
+                }
+               
+            }
+        } 
+*/
         for(unsigned i = row+1; i < dim; i++) {
             if(std::abs(p[i]) > buffer) {
                 
@@ -226,6 +240,7 @@ class SparseMatParallel {
                
             }
         } 
+        
         (*columns)[thread] = index_buffer;
     }
 
@@ -387,7 +402,7 @@ class SparseMatParallel {
 
         std::vector<double> getEigenvector(unsigned k) {
             std::vector<double> res;
-            for(unsigned i = 0; i < dim; i++) res.push_back(getCoeff(k,i));
+            for(unsigned i = 0; i < dim; i++) res.push_back(getCoeff(k  ,i));
             return res;
         }
 
